@@ -1,0 +1,30 @@
+{
+    "name": "Load More Extension",
+    "description": "load more! load more! load more!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "src/background.js"
+    },
+    "action": {},
+    "content_scripts": [
+        {
+          "matches": [
+            "https://github.com/*/*/issues/*"
+          ],
+          "js": [
+            "src/content.js"
+          ]
+        }
+    ],
+    "commands": {
+        "load-more": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+L",
+            "mac": "Command+Shift+L"
+          },
+          "description": "load more! load more! load more!"
+        }
+    },
+    "permissions": ["activeTab"]
+}

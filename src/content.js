@@ -1,12 +1,18 @@
 const DELAY = 500
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.text == "load-more") {
         let buttons = Array.from(document.getElementsByClassName("ajax-pagination-btn"))
         if (buttons.length > 0) {
             ArrayPlusDelay(buttons, (button) => {
                 button.click()
             }, DELAY)
+        } else {
+            sendResponse({response: "load-more-finish"})
         }
     }
 })

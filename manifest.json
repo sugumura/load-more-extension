@@ -10,7 +10,8 @@
     "content_scripts": [
         {
           "matches": [
-            "https://github.com/*/*/issues/*"
+            "https://github.com/*/*/issues/*",
+            "https://github.com/*/*/pull/*"
           ],
           "js": [
             "src/content.js"
@@ -26,5 +27,15 @@
           "description": "load more! load more! load more!"
         }
     },
-    "permissions": ["activeTab"]
+    "permissions": [
+      "activeTab",
+      "notifications",
+      "webRequest",
+      "https://github.com/"
+    ],
+    "icons": {
+      "16": "assets/icons/load_more_16.png",
+      "48": "assets/icons/load_more_48.png",
+      "128": "assets/icons/load_more_128.png"
+    }
 }

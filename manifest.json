@@ -27,11 +27,13 @@
           "description": "load more! load more! load more!"
         }
     },
+    "host_permissions": [
+      "https://github.com/"
+    ],
     "permissions": [
       "activeTab",
       "notifications",
-      "webRequest",
-      "https://github.com/"
+      "webRequest"
     ],
     "icons": {
       "16": "assets/icons/load_more_16.png",

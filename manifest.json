@@ -4,7 +4,7 @@
     "version": "1.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "src/background.js"
+        "service_worker": "src/js/background.js"
     },
     "action": {},
     "content_scripts": [
@@ -14,10 +14,14 @@
             "https://github.com/*/*/pull/*"
           ],
           "js": [
-            "src/content.js"
+            "src/js/content.js"
           ]
         }
     ],
+    "options_ui": {
+      "page": "src/options.html",
+      "open_in_tab": false
+    },
     "commands": {
         "load-more": {
           "suggested_key": {
@@ -33,7 +37,8 @@
     "permissions": [
       "activeTab",
       "notifications",
-      "webRequest"
+      "webRequest",
+      "storage"
     ],
     "icons": {
       "16": "assets/icons/load_more_16.png",

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "load more! load more! load more!",
   "scripts": {
-    "build": "./bin/build.sh",
-    "build:production": "./bin/production_build.sh"
+    "build": "rollup --config rollup.config.js",
+    "build:production": "rollup --config rollup.config.production.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,8 @@
   "devDependencies": {
     "@rollup/plugin-strip": "^2.1.0",
     "path": "^0.12.7",
-    "rollup": "^2.60.2"
+    "rollup": "^2.60.2",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-delete": "^2.0.0"
   }
 }

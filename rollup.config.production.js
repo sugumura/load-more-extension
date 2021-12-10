@@ -1,4 +1,6 @@
 import strip from '@rollup/plugin-strip';
+import copy from "rollup-plugin-copy";
+import del from 'rollup-plugin-delete'
 
 export default {
     input: {
@@ -9,10 +11,18 @@ export default {
     output: [
         {
             dir: 'dist/js',
-            format: 'cjs'
+            format: 'esm'
         }
     ],
     plugins: [
-        strip({})
+        del({ targets: 'dist/*' }),
+        strip({}),
+        copy({
+            targets: [
+                { src: 'manifest.js', dest: 'dist/manifest.js' },
+                { src: 'src/views', dest: 'dist/views' },
+                { src: 'assets', dest: 'dist/assets' }
+            ]
+        })
     ]
 }

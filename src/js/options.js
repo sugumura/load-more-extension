@@ -1,32 +1,28 @@
-function save_options() {    
-  const delay = document.getElementById("delay_input").value
-  console.log("delay", delay)
+import { AppSyncStorage } from "./lib/app_storage";
+import { elById } from "./lib/dom";
+
+const syncStorage = new AppSyncStorage(chrome || browser)
+
+async function save_options() {
+  const delay = elById("delay_input").value
+  console.log("save_options delay input", delay)
+  console.log(delay < 300)
   if (delay < 300) {
     updateStatus("minimum 300 milisecconds.")
+    return
   }
-  (chrome || browser).storage.sync.set(
-    {
-      delay: delay,
-    },
-    function () {
-      updateStatus("Options saved.")      
-    }
-  );
+  const items = await syncStorage.setItem({delay: delay});
+  updateStatus("Options saved.", items)
 }
 
-function restore_options() {
-  (chrome || browser).storage.sync.get(
-    {
-      delay: 1000,
-    },
-    function (items) {
-      document.getElementById("delay_input").value = items.delay;
-    }
-  );
+async function restore_options() {
+  const items = await syncStorage.getItem({ delay: 1000 });
+  console.log("restore_options", items);
+  elById("delay_input").value = items.delay;
 }
 
 function updateStatus(text) {
-  let status = document.getElementById("status");
+  let status = elById("status");
   status.textContent = text;
   setTimeout(function () {
     console.log("callback empty")
@@ -35,4 +31,4 @@ function updateStatus(text) {
 }
 
 document.addEventListener("DOMContentLoaded", restore_options);
-document.getElementById("save").addEventListener("click", save_options);
+elById("save").addEventListener("click", save_options);

@@ -1,3 +1,6 @@
+import copy from 'rollup-plugin-copy'
+import del from "rollup-plugin-delete";
+
 export default {
     input: {
         background: 'src/js/background.js',
@@ -7,7 +10,17 @@ export default {
     output: [
         {
             dir: 'dist/js',
-            format: 'cjs'
+            format: 'esm'
         }
+    ],
+    plugins: [
+        del({ targets: 'dist/*', runOnce: true }),
+        copy({
+            targets: [
+                { src: 'manifest.js', dest: 'dist/manifest.js' },
+                { src: 'src/views', dest: 'dist/views' },
+                { src: 'assets', dest: 'dist/assets' }
+            ]
+        })
     ]
 }

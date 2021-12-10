@@ -1,0 +1,22 @@
+{
+  "name": "load-more-extension",
+  "version": "1.0.0",
+  "description": "load more! load more! load more!",
+  "scripts": {
+    "build": "./bin/build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sugumura/load-more-extension.git"
+  },
+  "author": "Suguru Murakami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sugumura/load-more-extension/issues"
+  },
+  "homepage": "https://github.com/sugumura/load-more-extension#readme",
+  "devDependencies": {
+    "path": "^0.12.7",
+    "rollup": "^2.60.2"
+  }
+}

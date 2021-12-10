@@ -9,6 +9,16 @@ This extension will automatically press the Load more button.
 **ja**
 Load moreボタンを自動で押す拡張機能です
 
+## development
+
+```
+# develpment
+$ npm run build
+
+# production
+$ npm run build:production
+```
+
 ## License
 
 MIT

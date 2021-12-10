@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "load more! load more! load more!",
   "scripts": {
-    "build": "./bin/build.sh"
+    "build": "./bin/build.sh",
+    "build:production": "./bin/production_build.sh"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,7 @@
   },
   "homepage": "https://github.com/sugumura/load-more-extension#readme",
   "devDependencies": {
+    "@rollup/plugin-strip": "^2.1.0",
     "path": "^0.12.7",
     "rollup": "^2.60.2"
   }

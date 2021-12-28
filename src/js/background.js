@@ -1,10 +1,10 @@
-const DELAY = 500
+import { APP_DELAY } from "./lib/app_value";
 
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
+const browser = chrome ? chrome : browser
+
 // ユーザがアクションした場合にフラグを立てる
 let isLoadRequest = false
+let loadTab = null
 
 browser.action.setTitle({title: "Load more!"});
 
@@ -12,13 +12,17 @@ browser.action.setTitle({title: "Load more!"});
 browser.commands.onCommand.addListener((command) => {
     if (command === "load-more") {
         isLoadRequest = true
-        requestLoadMore()
+        browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            loadTab = tabs[0]
+            requestLoadMore()
+        })
     }
 })
 
 // icon click
 browser.action.onClicked.addListener((tab) => {
     isLoadRequest = true
+    loadTab = tab
     browser.tabs.sendMessage(tab.id, { text: "load-more" }, function (response) {
         finishProcess(response)
     });
@@ -29,7 +33,7 @@ browser.webRequest.onCompleted.addListener((request) => {
         if (isLoadRequest) {
             setTimeout(() => {
                 requestLoadMore()
-            }, DELAY)
+            }, APP_DELAY)
         }
     },
     {
@@ -42,10 +46,11 @@ browser.webRequest.onCompleted.addListener((request) => {
 );
 
 function requestLoadMore() {
-    browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { text: "load-more" }, function (response) {
-            finishProcess(response)
-        });
+    if (!loadTab) {
+        return
+    }
+    browser.tabs.sendMessage(loadTab.id, { text: "load-more" }, function (response) {
+        finishProcess(response)
     });
 }
 
@@ -61,5 +66,6 @@ function finishProcess(message) {
             iconUrl: browser.runtime.getURL("assets/icons/load_more_128.png"),
         })
         isLoadRequest = false
+        loadTab = null
     }
 }

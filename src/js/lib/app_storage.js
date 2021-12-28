@@ -34,7 +34,7 @@ export class AppSyncStorage extends AppStorage {
     }
 }
 
-export class AppLocaltorage extends AppStorage {
+export class AppLocalStorage extends AppStorage {
     constructor(browser) {
         super(browser, 'local');
     }

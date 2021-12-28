@@ -1,8 +1,6 @@
-const DELAY = 500
+import { APP_DELAY } from "./lib/app_value";
 
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
+const browser = chrome ? chrome : browser
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.text == "load-more") {
@@ -10,7 +8,8 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (buttons.length > 0) {
             ArrayPlusDelay(buttons, (button) => {
                 button.click()
-            }, DELAY)
+            }, APP_DELAY)
+            sendResponse({response: "load-more-click"})
         } else {
             sendResponse({response: "load-more-finish"})
         }

@@ -17,9 +17,9 @@ export default {
         del({ targets: 'dist/*', runOnce: true }),
         copy({
             targets: [
-                { src: 'manifest.js', dest: 'dist/manifest.js' },
-                { src: 'src/views', dest: 'dist/views' },
-                { src: 'assets', dest: 'dist/assets' }
+                { src: 'manifest.json', dest: 'dist' },
+                { src: 'src/views', dest: 'dist' },
+                { src: 'assets', dest: 'dist' }
             ]
         })
     ]
